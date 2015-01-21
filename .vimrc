@@ -21,7 +21,6 @@ set guioptions-=r  "remove right-hand scroll bar
 set guioptions-=L  "remove left-hand scroll bar
 
 " Syntax coloring lines that are too long just slows down the world
-set synmaxcol=512
 
 " Use case insensitive search, except when using capital letters
 set ignorecase
@@ -88,6 +87,7 @@ NeoBundle 'tpope/vim-unimpaired'
 NeoBundle 'trotter/autojump.vim'
 NeoBundle 'yegappan/mru'
 NeoBundle 'docunext/closetag.vim'
+NeoBundle 'christoomey/vim-conflicted'
 NeoBundleLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
 "------------ Bundles ---------------
 " If there are uninstalled bundles found on startup,
@@ -141,7 +141,6 @@ let g:tagbar_autofocus = 1
 "let g:tagbar_ctags_bin = ~/jsctags/lib/jsctags
 
 " For ctrlp
-let g:ctrlp_by_filename = 1
 let g:ctrlp_clear_cache_on_exit = 0
 
 let g:aghighlight=1
@@ -215,13 +214,10 @@ let g:colorizer_auto_filetype='css,less'
 let g:mustache_abbreviations = 1
 
 "Blue ui specific setting
-let g:project_path = '~/JPMC/blue-ui/'
-exe 'cd' '~/JPMC/blue-ui/src'
+exe 'cd' '~/JPMC/digital-ui'
 "cd ~/demoui/dist
-set tags+=~/JPMC/blue-ui/src/blue-ui/tags
 map <leader>c :!lessc ~/JPMC/blue-ui/src/blue-ui/assets/less/toolkit.less ~/JPMC/blue-ui/src/blue-ui/assets/less/toolkit.css<CR>
 map <leader>lc :!lessc % %:h/../css/%:t:r.css<cr>
-set autoread
 "vim-less's this command sometimes doesn't work
 autocmd BufNewFile,BufRead *.less set filetype=less
 let g:quickrun_config = {}
@@ -231,4 +227,3 @@ let g:quickrun_config.less = {
 			\ 'outputter/buffer/filetype' : 'css'}
 " For Ag
 let g:agprg="ag --column --smart-case --hidden --ignore='*.min.*'"
-" text kjlkjlj
