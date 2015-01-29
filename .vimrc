@@ -88,6 +88,7 @@ NeoBundle 'trotter/autojump.vim'
 NeoBundle 'yegappan/mru'
 NeoBundle 'docunext/closetag.vim'
 NeoBundle 'christoomey/vim-conflicted'
+NeoBundle 'godlygeek/tabular'
 NeoBundleLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
 "------------ Bundles ---------------
 " If there are uninstalled bundles found on startup,
@@ -125,6 +126,15 @@ nmap <leader>tds :TernDefSplit<CR>
 nmap <leader>tdt :TernDefTab<CR>
 nmap <leader>tr :TernRefs<CR>
 nmap <leader>trn :TernRename<CR>
+
+" Add browser prefix -webkit and -moz
+nmap <leader>bp Y2Pi-webkit-<c-c>jI-moz-<c-c> 
+
+" for manual folding {} [] block
+nmap <leader>{ ?{<enter>zaf}
+nmap <leader>} <leader>{ 
+nmap <leader>[ ?[<enter>zaf]
+nmap <leader>] <leader>[ 
 "------------- Key Mappings --------------------
 
 " For NerdTree
