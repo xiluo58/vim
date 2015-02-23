@@ -51,19 +51,22 @@ call neobundle#end()
 filetype plugin indent on
 
 "------------ Bundles ---------------
-"NeoBundle 'Lokaltog/powerline'
-"NeoBundle 'chrisbra/csv.vim'
+"NeoBundle 'godlygeek/tabular'
+"NeoBundle 'trotter/autojump.vim'
+NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'JavaScript-Indent'
 NeoBundle 'L9'
 NeoBundle 'Lokaltog/vim-easymotion'
 NeoBundle 'Raimondi/delimitMate'
 NeoBundle 'SirVer/ultisnips'
 NeoBundle 'Valloric/YouCompleteMe'
-NeoBundle 'VisIncr'
-NeoBundle 'airblade/vim-gitgutter' " commented because pop up error
+"NeoBundle 'VisIncr'
+NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'bkad/CamelCaseMotion'
 NeoBundle 'bling/vim-airline'
 NeoBundle 'chrisbra/Colorizer'
+NeoBundle 'christoomey/vim-conflicted'
+NeoBundle 'docunext/closetag.vim'
 NeoBundle 'editorconfig/editorconfig-vim'
 NeoBundle 'elzr/vim-json'
 NeoBundle 'groenewege/vim-less'
@@ -73,22 +76,17 @@ NeoBundle 'majutsushi/tagbar'
 NeoBundle 'marijnh/tern_for_vim'
 NeoBundle 'mattn/emmet-vim'
 NeoBundle 'mustache/vim-mustache-handlebars'
-NeoBundle 'nathanaelkane/vim-indent-guides'
+"NeoBundle 'nathanaelkane/vim-indent-guides'
 NeoBundle 'rking/ag.vim'
 NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'scrooloose/syntastic'
-NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'tmhedberg/matchit'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tpope/vim-git'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-unimpaired'
-NeoBundle 'trotter/autojump.vim'
 NeoBundle 'yegappan/mru'
-NeoBundle 'docunext/closetag.vim'
-NeoBundle 'christoomey/vim-conflicted'
-NeoBundle 'godlygeek/tabular'
 NeoBundleLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
 "------------ Bundles ---------------
 " If there are uninstalled bundles found on startup,
@@ -135,6 +133,11 @@ nmap <leader>{ ?{<enter>zaf}
 nmap <leader>} <leader>{ 
 nmap <leader>[ ?[<enter>zaf]
 nmap <leader>] <leader>[ 
+
+
+nmap <leader>gr  :s/col-\(\a\{2}\)-\(\d*\)/\1: \2,/g<enter>:s/,}/}<enter>
+nmap <leader>of  :s/col-\(\a\{2}\)-offset-\(\d*\)/\1: \2,/g<enter>:s/,}/}<enter>
+"nmap <leader>hj 
 "------------- Key Mappings --------------------
 
 " For NerdTree
@@ -218,18 +221,20 @@ if executable('ag')
 endif
 
 "Colorizer
-let g:colorizer_auto_filetype='css,less'
+"let g:colorizer_auto_filetype='css,less'
 
 
 let g:mustache_abbreviations = 1
 
 "Blue ui specific setting
 exe 'cd' '~/JPMC/digital-ui'
-"cd ~/demoui/dist
-map <leader>c :!lessc ~/JPMC/blue-ui/src/blue-ui/assets/less/toolkit.less ~/JPMC/blue-ui/src/blue-ui/assets/less/toolkit.css<CR>
-map <leader>lc :!lessc % %:h/../css/%:t:r.css<cr>
+"map <leader>c :!lessc ~/JPMC/blue-ui/src/blue-ui/assets/less/toolkit.less ~/JPMC/blue-ui/src/blue-ui/assets/less/toolkit.css<CR>
+"map <leader>lc :!lessc % %:h/../css/%:t:r.css<cr>
 "vim-less's this command sometimes doesn't work
 autocmd BufNewFile,BufRead *.less set filetype=less
+autocmd BufNewFile,BufRead *.less set syntax=less
+
+"autocmd BufNewFile,BufRead *.html set syntax=mustache
 let g:quickrun_config = {}
 let g:quickrun_config.less = {
 			\ 'command' : 'lessc',
