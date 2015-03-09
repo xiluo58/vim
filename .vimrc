@@ -20,21 +20,16 @@ colorscheme molokai
 set guioptions-=r  "remove right-hand scroll bar
 set guioptions-=L  "remove left-hand scroll bar
 
-" Syntax coloring lines that are too long just slows down the world
-
 " Use case insensitive search, except when using capital letters
 set ignorecase
 set smartcase
 set hlsearch
 set incsearch
-"set clipboard=unnamed
-filetype plugin indent on
 
 let mapleader = ","
 
 " display indentation guides
 set list listchars=tab:\|\ ,trail:·,extends:»,precedes:«,nbsp:×
-
 
 " Required:
 call neobundle#begin(expand('~/.vim/bundle/'))
@@ -51,8 +46,6 @@ call neobundle#end()
 filetype plugin indent on
 
 "------------ Bundles ---------------
-"NeoBundle 'godlygeek/tabular'
-"NeoBundle 'trotter/autojump.vim'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'JavaScript-Indent'
 NeoBundle 'L9'
@@ -60,9 +53,7 @@ NeoBundle 'Lokaltog/vim-easymotion'
 NeoBundle 'Raimondi/delimitMate'
 NeoBundle 'SirVer/ultisnips'
 NeoBundle 'Valloric/YouCompleteMe'
-"NeoBundle 'VisIncr'
 NeoBundle 'airblade/vim-gitgutter'
-NeoBundle 'bkad/CamelCaseMotion'
 NeoBundle 'bling/vim-airline'
 NeoBundle 'chrisbra/Colorizer'
 NeoBundle 'christoomey/vim-conflicted'
@@ -76,7 +67,6 @@ NeoBundle 'majutsushi/tagbar'
 NeoBundle 'marijnh/tern_for_vim'
 NeoBundle 'mattn/emmet-vim'
 NeoBundle 'mustache/vim-mustache-handlebars'
-"NeoBundle 'nathanaelkane/vim-indent-guides'
 NeoBundle 'rking/ag.vim'
 NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'scrooloose/nerdtree'
@@ -88,6 +78,16 @@ NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-unimpaired'
 NeoBundle 'yegappan/mru'
 NeoBundleLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
+
+NeoBundle 'Shougo/vimproc.vim', {
+\ 'build' : {
+\     'windows' : 'tools\\update-dll-mingw',
+\     'cygwin' : 'make -f make_cygwin.mak',
+\     'mac' : 'make -f make_mac.mak',
+\     'linux' : 'make',
+\     'unix' : 'gmake',
+\    },
+\ }
 "------------ Bundles ---------------
 " If there are uninstalled bundles found on startup,
 " this will conveniently prompt you to install them.
@@ -99,12 +99,11 @@ map <F2> :let b:tagbar_ignore=0<CR>:TagbarToggle<CR>
 "map <F2> :TagbarToggle<CR>
 map <leader>fj :%!python -m json.tool<CR>
 map <leader>fx :% !xmllint --format -<CR>
-map <leader>y ^"*y$
 map <leader>nr :NERDTree root<CR>
-map <c-h> <c-w>h
-map <c-j> <c-w>j
-map <c-k> <c-w>k
-map <c-l> <c-w>l
+noremap <c-h> <c-w>h
+noremap <c-j> <c-w>j
+noremap <c-k> <c-w>k
+noremap <c-l> <c-w>l
 nmap <leader>gf :CtrlP<CR><C-\>w
 nmap <leader>ag :Ag <c-r>"<cr>
 nmap <leader>agw :Ag <c-r><c-w> -w<cr>
@@ -115,29 +114,21 @@ nnoremap <Leader>yf :let @*=expand("%:t")<cr>:echo "Copied file name to clipboar
 " Copy current buffer path without filename to system clipboard
 nnoremap <Leader>yd :let @*=expand("%:h")<cr>:echo "Copied file directory to clipboard"<cr>
 
-"nmap <leader>td :TernDoc<CR>
-nmap <leader>tdb :TernDocBrowse<CR>
-nmap <leader>tt :TernType<CR>
-nmap <leader>td :TernDef<CR>
-nmap <leader>tdp :TernDefPreview<CR>
-nmap <leader>tds :TernDefSplit<CR>
-nmap <leader>tdt :TernDefTab<CR>
-nmap <leader>tr :TernRefs<CR>
-nmap <leader>trn :TernRename<CR>
 
 " Add browser prefix -webkit and -moz
-nmap <leader>bp Y2Pi-webkit-<c-c>jI-moz-<c-c> 
+nnoremap <leader>bp Y2Pi-webkit-<c-c>jI-moz-<c-c> 
 
 " for manual folding {} [] block
-nmap <leader>{ ?{<enter>zaf}
-nmap <leader>} <leader>{ 
-nmap <leader>[ ?[<enter>zaf]
-nmap <leader>] <leader>[ 
+nnoremap <leader>{ ?{<enter>zaf}
+nnoremap <leader>} <leader>{ 
+nnoremap <leader>[ ?[<enter>zaf]
+nnoremap <leader>] <leader>[ 
 
 
-nmap <leader>gr  :s/col-\(\a\{2}\)-\(\d*\)/\1: \2,/g<enter>:s/,}/}<enter>
+"Convert col classes to dataset data style
+nmap <leader>gr  :s/col-\(\a\{2}\)-\(\d*\)/\1: \2,/g<enter>:s/,}/}<enter> 
 nmap <leader>of  :s/col-\(\a\{2}\)-offset-\(\d*\)/\1: \2,/g<enter>:s/,}/}<enter>
-"nmap <leader>hj 
+inoremap jk <esc>
 "------------- Key Mappings --------------------
 
 " For NerdTree
@@ -147,7 +138,6 @@ let NERDTreeMouseMode=2
 " For easymotion
 let g:EasyMotion_do_mapping = 1
 
-autocmd BufNewFile,BufReadPost */lib/*.js,*.min.js let b:tagbar_ignore = 1 " Exclude some js file that may cause jsctags run for a long time
 let b:tagbar_ignore = 1
 let g:tagbar_compact = 1
 let g:tagbar_autofocus = 1
@@ -211,7 +201,7 @@ set dir=~/.vimswap//
 let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
 
-let g:delimitMate_expand_cr = 1
+let g:delimitMate_expand_cr = 2
 
 if executable('ag')
   " Use Ag over Grep
@@ -231,10 +221,14 @@ exe 'cd' '~/JPMC/digital-ui'
 "map <leader>c :!lessc ~/JPMC/blue-ui/src/blue-ui/assets/less/toolkit.less ~/JPMC/blue-ui/src/blue-ui/assets/less/toolkit.css<CR>
 "map <leader>lc :!lessc % %:h/../css/%:t:r.css<cr>
 "vim-less's this command sometimes doesn't work
-autocmd BufNewFile,BufRead *.less set filetype=less
-autocmd BufNewFile,BufRead *.less set syntax=less
+augroup myGroup
+	autocmd!
+	autocmd BufNewFile,BufRead *.less set filetype=less
+	autocmd BufNewFile,BufRead *.less set syntax=less
+	autocmd BufWritePost .vimrc so $MYVIMRC
+augroup END
 
-"autocmd BufNewFile,BufRead *.html set syntax=mustache
+
 let g:quickrun_config = {}
 let g:quickrun_config.less = {
 			\ 'command' : 'lessc',
@@ -242,3 +236,41 @@ let g:quickrun_config.less = {
 			\ 'outputter/buffer/filetype' : 'css'}
 " For Ag
 let g:agprg="ag --column --smart-case --hidden --ignore='*.min.*'"
+
+
+" For NerdComment
+let g:NERDCustomDelimiters = {
+			\ 'html.mustache': { 'left': '<!--', 'leftAlt': '{{!', 'right': '-->', 'rightAlt': '}}' }
+			\ }
+
+
+vnoremap <leader>g y:<c-u>call ConvertHTML()<cr>
+vnoremap <leader>ye y:<c-u>call ConvertEventName()<cr>
+nnoremap <leader>ye yiw:<c-u>call ConvertEventName()<cr>
+
+function! ConvertHTML()
+	let l:input = @@
+	let l:input = substitute(l:input, '<\w\+>', '{\n', 'g')
+	let l:input = substitute(l:input, '<div', '{\n', 'g')
+	let l:input = substitute(l:input, '</div>', '\n},\n', 'g')
+	let l:input = substitute(l:input, 'for=[''"]\w*[''"]', '', 'g')
+	let l:input = substitute(l:input, '<\w\+', '{\n', 'g')
+	let l:input = substitute(l:input, '<\/\w\+>', '\n}\n', 'g')
+	let l:input = substitute(l:input, '\/>', '\n},\n', 'g')
+	let l:input = substitute(l:input, '>', ',\n', 'g')
+	let l:input = substitute(l:input, '" ', '",\n', 'g')
+	let l:input = substitute(l:input, '=', ': ', 'g')
+
+
+	let l:input = substitute(l:input, '\s\+\n', '', 'g')
+	let l:input = substitute(l:input, '\n\{2,}', '\n', 'g')
+	"echom l:input
+	let @@ = l:input
+endfunction
+
+function! ConvertEventName()
+	let l:input = @@
+	let l:input = substitute(l:input, '_\(\w\)', '\U\1', 'g')
+	echom l:input
+	let @* = l:input
+endfunction
