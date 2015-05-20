@@ -19,6 +19,7 @@ set nowrap
 colorscheme molokai
 set guioptions-=r  "remove right-hand scroll bar
 set guioptions-=L  "remove left-hand scroll bar
+set diffopt+=vertical
 
 " Use case insensitive search, except when using capital letters
 set ignorecase
@@ -34,6 +35,9 @@ set list listchars=tab:\|\ ,trail:·,extends:»,precedes:«,nbsp:×
 " Required:
 call neobundle#begin(expand('~/.vim/bundle/'))
 
+"To support custom tag
+let g:html_indent_tags='\w\+'
+
 " Let NeoBundle manage NeoBundle
 " Required:
 NeoBundleFetch 'Shougo/neobundle.vim'
@@ -46,22 +50,24 @@ call neobundle#end()
 filetype plugin indent on
 
 "------------ Bundles ---------------
-NeoBundle 'thinca/vim-quickrun'
-NeoBundle 'JavaScript-Indent'
+"NeoBundle 'JavaScript-Indent'
+NeoBundle 'othree/html5.vim'
 NeoBundle 'L9'
 NeoBundle 'Lokaltog/vim-easymotion'
 NeoBundle 'Raimondi/delimitMate'
 NeoBundle 'SirVer/ultisnips'
 NeoBundle 'Valloric/YouCompleteMe'
 NeoBundle 'airblade/vim-gitgutter'
+NeoBundle 'bkad/CamelCaseMotion'
 NeoBundle 'bling/vim-airline'
 NeoBundle 'chrisbra/Colorizer'
-NeoBundle 'christoomey/vim-conflicted'
+"NeoBundle 'christoomey/vim-conflicted'
 NeoBundle 'docunext/closetag.vim'
 NeoBundle 'editorconfig/editorconfig-vim'
 NeoBundle 'elzr/vim-json'
 NeoBundle 'groenewege/vim-less'
 NeoBundle 'honza/vim-snippets'
+NeoBundle 'ihacklog/HiCursorWords'
 NeoBundle 'kien/ctrlp.vim'
 NeoBundle 'majutsushi/tagbar'
 NeoBundle 'marijnh/tern_for_vim'
@@ -71,6 +77,7 @@ NeoBundle 'rking/ag.vim'
 NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'scrooloose/syntastic'
+"NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'tmhedberg/matchit'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tpope/vim-git'
@@ -88,10 +95,6 @@ NeoBundle 'Shougo/vimproc.vim', {
 \     'unix' : 'gmake',
 \    },
 \ }
-"------------ Bundles ---------------
-" If there are uninstalled bundles found on startup,
-" this will conveniently prompt you to install them.
-NeoBundleCheck
 
 "------------- Key Mappings --------------------
 map <F1> :NERDTreeToggle<CR>
@@ -110,13 +113,11 @@ nmap <leader>agw :Ag <c-r><c-w> -w<cr>
 " Copy current buffer path relative to root of VIM session to system clipboard
 nnoremap <Leader>yp :let @*=expand("%")<cr>:echo "Copied file path to clipboard"<cr>
 " Copy current filename to system clipboard
-nnoremap <Leader>yf :let @*=expand("%:t")<cr>:echo "Copied file name to clipboard"<cr>
+nnoremap <Leader>yf :let @*=expand("%:t:r")<cr>:echo "Copied file name to clipboard"<cr>
 " Copy current buffer path without filename to system clipboard
 nnoremap <Leader>yd :let @*=expand("%:h")<cr>:echo "Copied file directory to clipboard"<cr>
 
-
-" Add browser prefix -webkit and -moz
-nnoremap <leader>bp Y2Pi-webkit-<c-c>jI-moz-<c-c> 
+nnoremap <leader>nf :NERDTreeFind<cr>
 
 " for manual folding {} [] block
 nnoremap <leader>{ ?{<enter>zaf}
@@ -125,9 +126,6 @@ nnoremap <leader>[ ?[<enter>zaf]
 nnoremap <leader>] <leader>[ 
 
 
-"Convert col classes to dataset data style
-nmap <leader>gr  :s/col-\(\a\{2}\)-\(\d*\)/\1: \2,/g<enter>:s/,}/}<enter> 
-nmap <leader>of  :s/col-\(\a\{2}\)-offset-\(\d*\)/\1: \2,/g<enter>:s/,}/}<enter>
 inoremap jk <esc>
 "------------- Key Mappings --------------------
 
@@ -160,9 +158,7 @@ endfunction
 "au FileType javascript call JavaScriptFold()
 au FileType javascript setl fen
 
-set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
-set laststatus=2 " So Powerline will always be shown
-
+set laststatus=2 " So status bar will always be shown
 " For javascript-libraries-syntax.vim
 "let g:used_javascript_libs = 'jquery'
 
@@ -210,17 +206,8 @@ if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
 
-"Colorizer
-"let g:colorizer_auto_filetype='css,less'
-
-
 let g:mustache_abbreviations = 1
 
-"Blue ui specific setting
-exe 'cd' '~/JPMC/digital-ui'
-"map <leader>c :!lessc ~/JPMC/blue-ui/src/blue-ui/assets/less/toolkit.less ~/JPMC/blue-ui/src/blue-ui/assets/less/toolkit.css<CR>
-"map <leader>lc :!lessc % %:h/../css/%:t:r.css<cr>
-"vim-less's this command sometimes doesn't work
 augroup myGroup
 	autocmd!
 	autocmd BufNewFile,BufRead *.less set filetype=less
@@ -243,34 +230,4 @@ let g:NERDCustomDelimiters = {
 			\ 'html.mustache': { 'left': '<!--', 'leftAlt': '{{!', 'right': '-->', 'rightAlt': '}}' }
 			\ }
 
-
-vnoremap <leader>g y:<c-u>call ConvertHTML()<cr>
-vnoremap <leader>ye y:<c-u>call ConvertEventName()<cr>
-nnoremap <leader>ye yiw:<c-u>call ConvertEventName()<cr>
-
-function! ConvertHTML()
-	let l:input = @@
-	let l:input = substitute(l:input, '<\w\+>', '{\n', 'g')
-	let l:input = substitute(l:input, '<div', '{\n', 'g')
-	let l:input = substitute(l:input, '</div>', '\n},\n', 'g')
-	let l:input = substitute(l:input, 'for=[''"]\w*[''"]', '', 'g')
-	let l:input = substitute(l:input, '<\w\+', '{\n', 'g')
-	let l:input = substitute(l:input, '<\/\w\+>', '\n}\n', 'g')
-	let l:input = substitute(l:input, '\/>', '\n},\n', 'g')
-	let l:input = substitute(l:input, '>', ',\n', 'g')
-	let l:input = substitute(l:input, '" ', '",\n', 'g')
-	let l:input = substitute(l:input, '=', ': ', 'g')
-
-
-	let l:input = substitute(l:input, '\s\+\n', '', 'g')
-	let l:input = substitute(l:input, '\n\{2,}', '\n', 'g')
-	"echom l:input
-	let @@ = l:input
-endfunction
-
-function! ConvertEventName()
-	let l:input = @@
-	let l:input = substitute(l:input, '_\(\w\)', '\U\1', 'g')
-	echom l:input
-	let @* = l:input
-endfunction
+source ~/.vim/specific.vimrc
