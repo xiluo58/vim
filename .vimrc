@@ -35,8 +35,6 @@ set list listchars=tab:\|\ ,trail:·,extends:»,precedes:«,nbsp:×
 " Required:
 call neobundle#begin(expand('~/.vim/bundle/'))
 
-"To support custom tag
-let g:html_indent_tags='\w\+'
 
 " Let NeoBundle manage NeoBundle
 " Required:
@@ -45,13 +43,11 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 " You can specify revision/branch/tag.
 " NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
 
-call neobundle#end()
-" Required:
-filetype plugin indent on
 
 "------------ Bundles ---------------
 "NeoBundle 'JavaScript-Indent'
-NeoBundle 'othree/html5.vim'
+"NeoBundle 'chrisbra/Colorizer'
+"NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'L9'
 NeoBundle 'Lokaltog/vim-easymotion'
 NeoBundle 'Raimondi/delimitMate'
@@ -60,11 +56,11 @@ NeoBundle 'Valloric/YouCompleteMe'
 NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'bkad/CamelCaseMotion'
 NeoBundle 'bling/vim-airline'
-NeoBundle 'chrisbra/Colorizer'
-"NeoBundle 'christoomey/vim-conflicted'
+NeoBundle 'christoomey/vim-conflicted'
 NeoBundle 'docunext/closetag.vim'
 NeoBundle 'editorconfig/editorconfig-vim'
 NeoBundle 'elzr/vim-json'
+NeoBundle 'godlygeek/tabular'
 NeoBundle 'groenewege/vim-less'
 NeoBundle 'honza/vim-snippets'
 NeoBundle 'ihacklog/HiCursorWords'
@@ -73,11 +69,13 @@ NeoBundle 'majutsushi/tagbar'
 NeoBundle 'marijnh/tern_for_vim'
 NeoBundle 'mattn/emmet-vim'
 NeoBundle 'mustache/vim-mustache-handlebars'
+NeoBundle 'othree/html5.vim'
+NeoBundle 'pangloss/vim-javascript'
 NeoBundle 'rking/ag.vim'
 NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'scrooloose/syntastic'
-"NeoBundle 'thinca/vim-quickrun'
+"NeoBundle 'terryma/vim-multiple-cursors'
 NeoBundle 'tmhedberg/matchit'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tpope/vim-git'
@@ -95,6 +93,9 @@ NeoBundle 'Shougo/vimproc.vim', {
 \     'unix' : 'gmake',
 \    },
 \ }
+call neobundle#end()
+" Required:
+filetype plugin indent on
 
 "------------- Key Mappings --------------------
 map <F1> :NERDTreeToggle<CR>
@@ -116,6 +117,7 @@ nnoremap <Leader>yp :let @*=expand("%")<cr>:echo "Copied file path to clipboard"
 nnoremap <Leader>yf :let @*=expand("%:t:r")<cr>:echo "Copied file name to clipboard"<cr>
 " Copy current buffer path without filename to system clipboard
 nnoremap <Leader>yd :let @*=expand("%:h")<cr>:echo "Copied file directory to clipboard"<cr>
+nnoremap <Leader>yff :let @*=expand("%:p")<cr>:echo "Copied file directory to clipboard"<cr>
 
 nnoremap <leader>nf :NERDTreeFind<cr>
 
@@ -128,6 +130,8 @@ nnoremap <leader>] <leader>[
 
 inoremap jk <esc>
 "------------- Key Mappings --------------------
+"To support custom tag
+let g:html_indent_tags='\w\+'
 
 " For NerdTree
 let NERDChristmasTree=1
