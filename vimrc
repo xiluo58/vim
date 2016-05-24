@@ -5,6 +5,8 @@ if has('vim_starting')
 endif
 
 if has("gui_running")
+	set guifont=Menlo:h9
+	set lines=999 columns=999
 	if has("gui_macvim")
 		"set guifont=Menlo
 		"set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h12
@@ -19,7 +21,11 @@ set nowrap
 colorscheme molokai
 set guioptions-=r  "remove right-hand scroll bar
 set guioptions-=L  "remove left-hand scroll bar
+set guioptions-=m
+set guioptions-=T
 set diffopt+=vertical
+set synmaxcol=256
+syntax on
 
 " Use case insensitive search, except when using capital letters
 set ignorecase
@@ -84,15 +90,6 @@ NeoBundle 'tpope/vim-unimpaired'
 NeoBundle 'yegappan/mru'
 NeoBundleLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
 
-NeoBundle 'Shougo/vimproc.vim', {
-\ 'build' : {
-\     'windows' : 'tools\\update-dll-mingw',
-\     'cygwin' : 'make -f make_cygwin.mak',
-\     'mac' : 'make -f make_mac.mak',
-\     'linux' : 'make',
-\     'unix' : 'gmake',
-\    },
-\ }
 call neobundle#end()
 " Required:
 filetype plugin indent on
@@ -121,11 +118,6 @@ nnoremap <Leader>yff :let @*=expand("%:p")<cr>:echo "Copied file directory to cl
 
 nnoremap <leader>nf :NERDTreeFind<cr>
 
-" for manual folding {} [] block
-nnoremap <leader>{ ?{<enter>zaf}
-nnoremap <leader>} <leader>{ 
-nnoremap <leader>[ ?[<enter>zaf]
-nnoremap <leader>] <leader>[ 
 
 
 inoremap jk <esc>
@@ -148,18 +140,7 @@ let g:tagbar_autofocus = 1
 " For ctrlp
 let g:ctrlp_clear_cache_on_exit = 0
 
-let g:aghighlight=1
 
-function! JavaScriptFold()
-	setl foldmethod=syntax
-	setl foldlevelstart=1
-	syn region foldBraces start=/{/ end=/}/ transparent fold keepend extend
-	function! FoldText()
-		return substitute(getline(v:foldstart), '{.*', '{...}', '')
-	endfunction
-	setl foldtext=FoldText()
-endfunction
-"au FileType javascript call JavaScriptFold()
 au FileType javascript setl fen
 
 set laststatus=2 " So status bar will always be shown
@@ -220,13 +201,9 @@ augroup myGroup
 augroup END
 
 
-let g:quickrun_config = {}
-let g:quickrun_config.less = {
-			\ 'command' : 'lessc',
-			\ 'exec' : '%c %s',
-			\ 'outputter/buffer/filetype' : 'css'}
 " For Ag
-let g:agprg="ag --column --smart-case --hidden --ignore='*.min.*'"
+let g:ag_prg="ag --column --smart-case --hidden --ignore='*.min.*'"
+let g:ag_highlight=1
 
 
 " For NerdComment
@@ -234,6 +211,5 @@ let g:NERDCustomDelimiters = {
 			\ 'html.mustache': { 'left': '<!--', 'leftAlt': '{{!', 'right': '-->', 'rightAlt': '}}' }
 			\ }
 
-source ~/.vim/specific.vimrc
 
 
