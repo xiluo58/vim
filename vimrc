@@ -199,7 +199,6 @@ if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
 
-let g:mustache_abbreviations = 1
 
 augroup myGroup
 	autocmd!
@@ -214,10 +213,6 @@ let g:ag_prg="ag --column --smart-case --hidden --ignore='*.min.*'"
 let g:ag_highlight=1
 
 
-" For NerdComment
-let g:NERDCustomDelimiters = {
-			\ 'html.mustache': { 'left': '<!--', 'leftAlt': '{{!', 'right': '-->', 'rightAlt': '}}' }
-			\ }
 
 
 
