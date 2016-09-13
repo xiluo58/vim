@@ -1,7 +1,7 @@
 if has('vim_starting')
 	set nocompatible               " Be iMproved
 	" Required:
-	set runtimepath+=~/.vim/bundle/neobundle.vim/
+	set runtimepath+=~/vimfiles/bundle/neobundle.vim/
 endif
 
 if has("gui_running")
@@ -36,10 +36,10 @@ set incsearch
 let mapleader = ","
 
 " display indentation guides
-set list listchars=tab:\|\ ,trail:·,extends:»,precedes:«,nbsp:×
+"set list listchars=tab:\|\ ,trail:·,extends:»,precedes:«,nbsp:×
 
 " Required:
-call neobundle#begin(expand('~/.vim/bundle/'))
+call neobundle#begin(expand('~/vimfiles/bundle/'))
 
 
 " Let NeoBundle manage NeoBundle
@@ -63,14 +63,14 @@ NeoBundle 'bkad/CamelCaseMotion'
 "NeoBundle 'bling/vim-airline'
 NeoBundle 'christoomey/vim-conflicted'
 NeoBundle 'docunext/closetag.vim'
-NeoBundle 'editorconfig/editorconfig-vim'
+"NeoBundle 'editorconfig/editorconfig-vim'
 NeoBundle 'elzr/vim-json'
 NeoBundle 'godlygeek/tabular'
 NeoBundle 'honza/vim-snippets'
 NeoBundle 'ihacklog/HiCursorWords'
 NeoBundle 'kien/ctrlp.vim'
-NeoBundle 'majutsushi/tagbar'
-"NeoBundle 'marijnh/tern_for_vim'
+"NeoBundle 'majutsushi/tagbar'
+NeoBundle 'ternjs/tern_for_vim'
 NeoBundle 'mattn/emmet-vim'
 NeoBundle 'othree/html5.vim'
 NeoBundle 'pangloss/vim-javascript'
@@ -84,6 +84,7 @@ NeoBundle 'tpope/vim-git'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-unimpaired'
 NeoBundle 'yegappan/mru'
+"NeoBundle 'jistr/vim-nerdtree-tabs'
 NeoBundleLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
 
 call neobundle#end()
@@ -131,7 +132,6 @@ let g:EasyMotion_do_mapping = 1
 let b:tagbar_ignore = 1
 let g:tagbar_compact = 1
 let g:tagbar_autofocus = 1
-"let g:tagbar_ctags_bin = ~/jsctags/lib/jsctags
 
 " For ctrlp
 let g:ctrlp_clear_cache_on_exit = 0
@@ -172,7 +172,7 @@ let g:indent_guides_guide_size=1
 "let g:indent_guides_enable_on_vim_startup = 1
 
 " --------------- Project specific ----------------------
-set dir=~/.vimswap//
+set dir=~/vimswap//
 " set default pwd
 " --------------- Project specific ----------------------
 let g:ycm_collect_identifiers_from_tags_files = 1
