@@ -24,7 +24,7 @@ set guioptions-=L  "remove left-hand scroll bar
 set guioptions-=m
 set guioptions-=T
 set diffopt+=vertical
-set synmaxcol=256
+" set synmaxcol=5120
 syntax on
 
 " Use case insensitive search, except when using capital letters
@@ -60,17 +60,18 @@ NeoBundle 'Raimondi/delimitMate'
 NeoBundle 'SirVer/ultisnips'
 NeoBundle 'Valloric/YouCompleteMe'
 NeoBundle 'bkad/CamelCaseMotion'
-"NeoBundle 'bling/vim-airline'
-NeoBundle 'christoomey/vim-conflicted'
+NeoBundle 'bling/vim-airline'
+"NeoBundle 'christoomey/vim-conflicted'
 NeoBundle 'docunext/closetag.vim'
-"NeoBundle 'editorconfig/editorconfig-vim'
+NeoBundle 'editorconfig/editorconfig-vim'
 NeoBundle 'elzr/vim-json'
 NeoBundle 'godlygeek/tabular'
 NeoBundle 'honza/vim-snippets'
 NeoBundle 'ihacklog/HiCursorWords'
-NeoBundle 'kien/ctrlp.vim'
+NeoBundle 'ctrlpvim/ctrlp.vim'
+NeoBundle 'dkprice/vim-easygrep'
 "NeoBundle 'majutsushi/tagbar'
-NeoBundle 'ternjs/tern_for_vim'
+"NeoBundle 'ternjs/tern_for_vim'
 NeoBundle 'mattn/emmet-vim'
 NeoBundle 'othree/html5.vim'
 NeoBundle 'pangloss/vim-javascript'
@@ -83,9 +84,25 @@ NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tpope/vim-git'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-unimpaired'
+NeoBundle 'tpope/vim-abolish'
 NeoBundle 'yegappan/mru'
-"NeoBundle 'jistr/vim-nerdtree-tabs'
+NeoBundle 'jistr/vim-nerdtree-tabs'
+NeoBundle 'leafgarland/typescript-vim'
+NeoBundle 'AndrewRadev/splitjoin.vim'
+NeoBundle 'quramy/tsuquyomi'
+NeoBundle 'IN3D/vim-raml'
+NeoBundle 'dkprice/vim-easygrep'
+NeoBundle 'dikiaap/minimalist', {'script_type' : 'colors'}
 NeoBundleLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
+NeoBundle 'Shougo/vimproc.vim', {
+			\ 'build' : {
+			\     'windows' : 'tools\\update-dll-mingw',
+			\     'cygwin' : 'make -f make_cygwin.mak',
+			\     'mac' : 'make',
+			\     'linux' : 'make',
+			\     'unix' : 'gmake',
+			\    },
+			\ }
 
 call neobundle#end()
 " Required:
@@ -126,6 +143,9 @@ let g:html_indent_tags='\w\+'
 let NERDChristmasTree=1
 let NERDTreeMouseMode=2
 
+" For nerdcommenter
+let NERDSpaceDelims=1
+
 " For easymotion
 let g:EasyMotion_do_mapping = 1
 
@@ -135,6 +155,7 @@ let g:tagbar_autofocus = 1
 
 " For ctrlp
 let g:ctrlp_clear_cache_on_exit = 0
+let g:ctrlp_by_filename = 1
 
 
 au FileType javascript setl fen
@@ -177,17 +198,20 @@ set dir=~/vimswap//
 " --------------- Project specific ----------------------
 let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
-let g:ycm_filetype_specific_completion_to_disable = {
-			\  'javascript': 1,
-			\}
-
 let g:delimitMate_expand_cr = 2
 
 if executable('ag')
   " Use Ag over Grep
   set grepprg=ag\ --nogroup\ --nocolor
   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  "let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  let g:ctrlp_user_command = {
+    \ 'types': {
+      \ 1: ['.git', 'cd %s && git ls-files --cached --exclude-standard --others'],
+      \ 2: ['.hg', 'hg --cwd %s locate -I .'],
+      \ },
+    \ 'fallback': 'ag %s -l --nocolor -g ""'
+    \ }
 endif
 
 
@@ -203,7 +227,13 @@ augroup END
 let g:ag_prg="ag --column --smart-case --hidden --ignore='*.min.*'"
 let g:ag_highlight=1
 
+let g:syntastic_typescript_checkers = ['tslint']
 
+" For nerdtree-tabs
+let g:nerdtree_tabs_open_on_new_tab = 0
+let g:nerdtree_tabs_open_on_gui_startup = 0
 
+" camelcasemotion
+call camelcasemotion#CreateMotionMappings(',')
 
 
