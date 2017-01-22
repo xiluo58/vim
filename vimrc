@@ -132,6 +132,9 @@ nnoremap <Leader>yff :let @*=expand("%:p")<cr>:echo "Copied file directory to cl
 
 nnoremap <leader>nf :NERDTreeFind<cr>
 
+" change single line html to multiple lines
+nnoremap <leader>ml ^lma:s/>/>\r/g<cr>`a=%
+
 
 
 inoremap jk <esc>
