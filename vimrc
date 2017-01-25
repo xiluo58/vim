@@ -8,9 +8,9 @@ if has("gui_running")
 	set guifont=Menlo:h9
 	set lines=999 columns=999
 	if has("gui_macvim")
-		"set guifont=Menlo
+		set guifont=Menlo:h13
 		"set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h12
-		set guifont=Sauce\ Code\ Powerline:h12
+		"set guifont=Sauce\ Code\ Powerline:h12
 		"set guifont=Inconsolata:h13
 	endif
 endif
@@ -110,7 +110,7 @@ filetype plugin indent on
 
 "------------- Key Mappings --------------------
 map <F1> :NERDTreeToggle<CR>
-map <F2> :let b:tagbar_ignore=0<CR>:TagbarToggle<CR>
+map <leader>nt :NERDTreeToggle<CR>
 "map <F2> :TagbarToggle<CR>
 map <leader>fj :%!python -m json.tool<CR>
 map <leader>fx :% !xmllint --format -<CR>
@@ -231,6 +231,8 @@ let g:ag_prg="ag --column --smart-case --hidden --ignore='*.min.*'"
 let g:ag_highlight=1
 
 let g:syntastic_typescript_checkers = ['tslint']
+" Disable html checking
+let g:syntastic_html_checkers = []
 
 " For nerdtree-tabs
 let g:nerdtree_tabs_open_on_new_tab = 0
