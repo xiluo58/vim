@@ -101,7 +101,6 @@ NeoBundle 'AndrewRadev/splitjoin.vim'
 NeoBundle 'quramy/tsuquyomi'
 NeoBundle 'IN3D/vim-raml'
 NeoBundle 'dkprice/vim-easygrep'
-NeoBundle 'dikiaap/minimalist', {'script_type' : 'colors'}
 NeoBundleLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
 NeoBundle 'Shougo/vimproc.vim', {
 			\ 'build' : {
@@ -205,7 +204,7 @@ let g:indent_guides_guide_size=1
 "let g:indent_guides_enable_on_vim_startup = 1
 
 " --------------- Project specific ----------------------
-set dir=~/vimswap//
+set dir=~/vimswap/
 " set default pwd
 " --------------- Project specific ----------------------
 let g:ycm_collect_identifiers_from_tags_files = 1
