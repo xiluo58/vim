@@ -1,7 +1,11 @@
 if has('vim_starting')
 	set nocompatible               " Be iMproved
 	" Required:
-	set runtimepath+=~/vimfiles/bundle/neobundle.vim/
+	if has("win32")
+		set runtimepath+=~/vimfiles/bundle/neobundle.vim/
+	elseif has("mac")
+		set runtimepath+=~/.vim/bundle/neobundle.vim/
+	endif
 endif
 
 if has("gui_running")
@@ -39,7 +43,12 @@ let mapleader = ","
 "set list listchars=tab:\|\ ,trail:·,extends:»,precedes:«,nbsp:×
 
 " Required:
-call neobundle#begin(expand('~/vimfiles/bundle/'))
+if has("win32")
+	call neobundle#begin(expand('~/vimfiles/bundle/'))
+elseif has("mac")
+	call neobundle#begin(expand('~/.vim/bundle/'))
+endif
+
 
 
 " Let NeoBundle manage NeoBundle
