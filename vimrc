@@ -12,7 +12,7 @@ if has("gui_running")
 	set guifont=Menlo:h9
 	set lines=999 columns=999
 	if has("gui_macvim")
-		set guifont=Menlo:h13
+		set guifont=Monaco:h13
 		"set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h12
 		"set guifont=Sauce\ Code\ Powerline:h12
 		"set guifont=Inconsolata:h13
