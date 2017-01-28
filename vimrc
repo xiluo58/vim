@@ -111,6 +111,9 @@ NeoBundle 'Shougo/vimproc.vim', {
 			\     'unix' : 'gmake',
 			\    },
 			\ }
+if has("mac")
+	NeoBundle 'airblade/vim-gitgutter'
+endif
 
 call neobundle#end()
 " Required:
