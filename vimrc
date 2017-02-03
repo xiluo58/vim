@@ -78,7 +78,6 @@ NeoBundle 'godlygeek/tabular'
 NeoBundle 'honza/vim-snippets'
 NeoBundle 'ihacklog/HiCursorWords'
 NeoBundle 'ctrlpvim/ctrlp.vim'
-NeoBundle 'dkprice/vim-easygrep'
 "NeoBundle 'majutsushi/tagbar'
 "NeoBundle 'ternjs/tern_for_vim'
 NeoBundle 'mattn/emmet-vim'
@@ -100,7 +99,6 @@ NeoBundle 'leafgarland/typescript-vim'
 NeoBundle 'AndrewRadev/splitjoin.vim'
 NeoBundle 'quramy/tsuquyomi'
 NeoBundle 'IN3D/vim-raml'
-NeoBundle 'dkprice/vim-easygrep'
 NeoBundleLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
 NeoBundle 'Shougo/vimproc.vim', {
 			\ 'build' : {
