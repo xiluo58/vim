@@ -12,7 +12,8 @@ if has("gui_running")
 	set guifont=Menlo:h9
 	set lines=999 columns=999
 	if has("gui_macvim")
-		set guifont=Monaco:h13
+		" set guifont=Monaco:h13
+		set guifont=Sauce\ Code\ Pro\ Nerd\ Font\ Complete\ Mono:h15 
 		"set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h12
 		"set guifont=Sauce\ Code\ Powerline:h12
 		"set guifont=Inconsolata:h13
@@ -100,6 +101,8 @@ NeoBundle 'AndrewRadev/splitjoin.vim'
 NeoBundle 'quramy/tsuquyomi'
 NeoBundle 'IN3D/vim-raml'
 NeoBundleLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
+NeoBundle 'ryanoasis/vim-devicons'
+NeoBundle 'tiagofumo/vim-nerdtree-syntax-highlight'
 NeoBundle 'Shougo/vimproc.vim', {
 			\ 'build' : {
 			\     'windows' : 'tools\\update-dll-mingw',
@@ -250,4 +253,12 @@ let g:nerdtree_tabs_open_on_gui_startup = 0
 " camelcasemotion
 call camelcasemotion#CreateMotionMappings(',')
 
+"devicons requires
+let g:airline_powerline_fonts = 1
 
+let g:WebDevIconsNerdTreeAfterGlyphPadding = ''
+
+"Highlight full name (not only icons). You need to add this if you don't have vim-devicons and want highlight.
+let g:NERDTreeFileExtensionHighlightFullName = 1
+let g:NERDTreeExactMatchHighlightFullName = 1
+let g:NERDTreePatternMatchHighlightFullName = 1
