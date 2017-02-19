@@ -114,6 +114,7 @@ NeoBundle 'Shougo/vimproc.vim', {
 			\ }
 if has("mac")
 	NeoBundle 'airblade/vim-gitgutter'
+	NeoBundle 'rizzatti/dash.vim' " Require mac only app dash
 endif
 
 call neobundle#end()
