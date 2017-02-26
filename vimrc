@@ -235,7 +235,7 @@ augroup myGroup
 	autocmd!
 	autocmd BufNewFile,BufRead *.less set filetype=less
 	autocmd BufNewFile,BufRead *.less set syntax=less
-	autocmd BufWritePost .vimrc so $MYVIMRC
+	autocmd BufWritePost vimrc so $MYVIMRC
 augroup END
 
 
