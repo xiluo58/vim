@@ -23,7 +23,8 @@ endif
 set number
 set relativenumber
 set nowrap
-colorscheme molokai
+
+
 set guioptions-=r  "remove right-hand scroll bar
 set guioptions-=L  "remove left-hand scroll bar
 set guioptions-=m
@@ -103,6 +104,7 @@ NeoBundle 'IN3D/vim-raml'
 NeoBundleLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
 NeoBundle 'ryanoasis/vim-devicons'
 NeoBundle 'tiagofumo/vim-nerdtree-syntax-highlight'
+NeoBundle 'tomasr/molokai'
 NeoBundle 'Shougo/vimproc.vim', {
 			\ 'build' : {
 			\     'windows' : 'tools\\update-dll-mingw',
@@ -120,6 +122,10 @@ endif
 call neobundle#end()
 " Required:
 filetype plugin indent on
+
+" If you prefer the scheme to match the original monokai background color, put this in your .vimrc file:
+let g:molokai_original = 1
+colorscheme molokai
 
 "------------- Key Mappings --------------------
 map <F1> :NERDTreeToggle<CR>
