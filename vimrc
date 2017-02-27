@@ -113,7 +113,7 @@ NeoBundle 'Shougo/vimproc.vim', {
 			\    },
 			\ }
 if has("mac")
-	NeoBundle 'airblade/vim-gitgutter'
+	NeoBundle 'airblade/vim-gitgutter' "creates new window on Win OS, annoying only use on Mac
 	NeoBundle 'rizzatti/dash.vim' " Require mac only app dash
 endif
 
