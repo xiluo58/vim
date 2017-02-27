@@ -223,7 +223,6 @@ let g:indent_guides_guide_size=1
 set dir=~/vimswap/
 " set default pwd
 " --------------- Project specific ----------------------
-let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:delimitMate_expand_cr = 2
 
@@ -281,4 +280,7 @@ let g:angular_cli_stylesheet_format = 'scss'
 " For Colorizer
 let g:colorizer_auto_color = 1
 let g:colorizer_auto_filetype='css,scss'
+
+" For youcompleteme
+let g:ycm_key_invoke_completion = '<M-Space>'
 
