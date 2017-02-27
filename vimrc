@@ -104,6 +104,7 @@ NeoBundle 'IN3D/vim-raml'
 NeoBundleLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
 NeoBundle 'ryanoasis/vim-devicons'
 NeoBundle 'tiagofumo/vim-nerdtree-syntax-highlight'
+NeoBundle 'bdauria/angular-cli.vim'
 NeoBundle 'tomasr/molokai'
 NeoBundle 'Shougo/vimproc.vim', {
 			\ 'build' : {
@@ -273,3 +274,7 @@ let g:WebDevIconsNerdTreeAfterGlyphPadding = ''
 let g:NERDTreeFileExtensionHighlightFullName = 1
 let g:NERDTreeExactMatchHighlightFullName = 1
 let g:NERDTreePatternMatchHighlightFullName = 1
+
+" For angular-cli.vim
+let g:angular_cli_stylesheet_format = 'scss'
+
