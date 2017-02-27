@@ -62,7 +62,7 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 
 "------------ Bundles ---------------
 "NeoBundle 'JavaScript-Indent'
-"NeoBundle 'chrisbra/Colorizer'
+NeoBundle 'chrisbra/Colorizer'
 "NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'L9'
 NeoBundle 'Lokaltog/vim-easymotion'
