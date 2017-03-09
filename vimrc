@@ -156,7 +156,7 @@ nnoremap <leader>nf :NERDTreeFind<cr>
 imap <c-y><c-y> <c-y>,<c-c>^lma:s/>/>\r/g<cr>`a=%
 
 " remove file extension and semicolon at the end of line
-inoremap <c-y>f <c-c>:%s/\.\w*'/'<cr>A;<c-c>
+inoremap <c-y>f <c-c>:s/\.\w*'/'<cr>A;<c-c>
 
 " add semicolon to the end of the block
 inoremap <c-y>; <c-c>/[\]})]<cr>A;
