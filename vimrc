@@ -100,7 +100,7 @@ NeoBundle 'jistr/vim-nerdtree-tabs'
 NeoBundle 'leafgarland/typescript-vim'
 NeoBundle 'AndrewRadev/splitjoin.vim'
 NeoBundle 'quramy/tsuquyomi'
-NeoBundle 'IN3D/vim-raml'
+"NeoBundle 'IN3D/vim-raml'
 NeoBundleLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
 NeoBundle 'ryanoasis/vim-devicons'
 NeoBundle 'tiagofumo/vim-nerdtree-syntax-highlight'
