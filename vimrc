@@ -278,7 +278,7 @@ let g:NERDTreePatternMatchHighlightFullName = 1
 let g:angular_cli_stylesheet_format = 'scss'
 
 " For Colorizer
-let g:colorizer_auto_color = 1
+let g:colorizer_auto_color=0
 let g:colorizer_auto_filetype='css,scss'
 
 " For youcompleteme
