@@ -82,8 +82,8 @@ NeoBundle 'elzr/vim-json'
 NeoBundle 'honza/vim-snippets'
 NeoBundle 'ihacklog/HiCursorWords'
 NeoBundle 'ctrlpvim/ctrlp.vim'
-"NeoBundle 'majutsushi/tagbar'
-"NeoBundle 'ternjs/tern_for_vim'
+NeoBundle 'majutsushi/tagbar'
+NeoBundle 'ternjs/tern_for_vim'
 NeoBundle 'mattn/emmet-vim'
 NeoBundle 'othree/html5.vim'
 NeoBundle 'pangloss/vim-javascript'
@@ -133,7 +133,7 @@ colorscheme molokai
 "------------- Key Mappings --------------------
 map <F1> :NERDTreeToggle<CR>
 map <leader>nt :NERDTreeToggle<CR>
-"map <F2> :TagbarToggle<CR>
+nmap <leader>tb :TagbarToggle<CR>
 map <leader>fj :%!python -m json.tool<CR>
 map <leader>fx :% !xmllint --format -<CR>
 map <leader>nr :NERDTree root<CR>
