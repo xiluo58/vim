@@ -39,6 +39,8 @@ set smartcase
 set hlsearch
 set incsearch
 
+set foldmethod=syntax
+
 let mapleader = ","
 
 " display indentation guides
