@@ -1,0 +1,10 @@
+global !p
+def removeExtension(line):
+	snip.buffer[line] = re.sub('.ts\';', '\';', snip.buffer[line])
+	snip.cursor.preserve()
+endglobal
+
+post_jump "if snip.tabstop == 0: removeExtension(snip.tabstops[0].start.line)"
+snippet import "Import" b
+import { $1 } from '$2';
+endsnippet
