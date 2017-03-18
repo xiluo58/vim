@@ -40,6 +40,8 @@ set hlsearch
 set incsearch
 
 set foldmethod=syntax
+" Don't fold by default
+au BufWinEnter * normal zR
 
 let mapleader = ","
 
