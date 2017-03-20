@@ -135,6 +135,7 @@ colorscheme molokai
 "------------- Key Mappings --------------------
 map <F1> :NERDTreeToggle<CR>
 map <leader>nt :NERDTreeToggle<CR>
+nmap <F2> :TagbarToggle<CR>
 nmap <leader>tb :TagbarToggle<CR>
 map <leader>fj :%!python -m json.tool<CR>
 map <leader>fx :% !xmllint --format -<CR>
@@ -180,9 +181,24 @@ let NERDSpaceDelims=1
 " For easymotion
 let g:EasyMotion_do_mapping = 1
 
+" For tagbar
 let b:tagbar_ignore = 1
 let g:tagbar_compact = 1
 let g:tagbar_autofocus = 1
+let g:tagbar_type_typescript = {
+  \ 'ctagstype': 'typescript',
+  \ 'kinds': [
+    \ 'c:classes',
+    \ 'n:modules',
+    \ 'f:functions',
+    \ 'v:variables',
+    \ 'v:varlambdas',
+    \ 'm:members',
+    \ 'i:interfaces',
+    \ 'e:enums',
+  \ ]
+\ }
+
 
 " For ctrlp
 let g:ctrlp_clear_cache_on_exit = 0
