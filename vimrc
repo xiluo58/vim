@@ -92,7 +92,8 @@ NeoBundle 'pangloss/vim-javascript'
 NeoBundle 'rking/ag.vim'
 NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'scrooloose/nerdtree'
-NeoBundle 'scrooloose/syntastic'
+"NeoBundle 'scrooloose/syntastic'
+NeoBundle 'w0rp/ale'
 NeoBundle 'tmhedberg/matchit'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tpope/vim-git'
@@ -166,7 +167,14 @@ inoremap <c-y>f <c-c>:s/\.\w*'/'<cr>A;<c-c>
 " add semicolon to the end of the block
 inoremap <c-y>; <c-c>/[\]})]<cr>A;
 
-inoremap jk <esc>
+nnoremap <leader>tr A,<cr><c-c>i"<c-r>0": "<c-r>-"<c-c>==:s/ "$/"/e<cr>
+nmap <leader>tt gUiwyiwf>ldit<c-h>,tr<c-l>
+nmap <leader>ct yit<c-h>^3f"Pj<c-l>
+nmap <leader>at ^/translate<cr>2f"byw<c-h>A,<cr>"<c-r>0": ""<c-c>i
+" Remove text inside tag, add it to json
+nmap <leader>rt dit<c-h>^3f""-P<c-c>/: "<cr><c-l>/translate<cr>
+" copy line, add it to json
+nmap <leader>dt ^d$<c-h>pn<c-l>j
 "------------- Key Mappings --------------------
 "To support custom tag
 let g:html_indent_tags='\w\+'
@@ -244,6 +252,8 @@ set dir=~/vimswap/
 " set default pwd
 " --------------- Project specific ----------------------
 let g:ycm_autoclose_preview_window_after_insertion = 1
+" Collect identifiers from string, easier to edit json file
+let g:ycm_collect_identifiers_from_comments_and_strings = 1 
 let g:delimitMate_expand_cr = 2
 
 if executable('ag')
@@ -293,9 +303,11 @@ let g:WebDevIconsNerdTreeAfterGlyphPadding = ''
 let g:NERDTreeFileExtensionHighlightFullName = 1
 let g:NERDTreeExactMatchHighlightFullName = 1
 let g:NERDTreePatternMatchHighlightFullName = 1
+let g:NERDTreeIgnore=['\.spec\.ts$']
 
 " For angular-cli.vim
 let g:angular_cli_stylesheet_format = 'scss'
+autocmd FileType typescript,html call angular_cli#init()
 
 " For Colorizer
 let g:colorizer_auto_color=0
@@ -304,3 +316,5 @@ let g:colorizer_auto_filetype='css,scss'
 " For youcompleteme
 let g:ycm_key_invoke_completion = '<M-Space>'
 
+" For ale
+let g:ale_linters = {'html': []}
