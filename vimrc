@@ -9,24 +9,25 @@ if has('vim_starting')
 endif
 
 if has("gui_running")
-	set guifont=Menlo:h9
-	set lines=999 columns=999
+	" set lines=999 columns=999
+	if has("win32")
+		 au GUIEnter * simalt ~x
+		 set guifont=SauceCodePro_NF:h10
+	 endif
 	if has("gui_macvim")
 		" set guifont=Monaco:h13
 		set guifont=Sauce\ Code\ Pro\ Medium\ Nerd\ Font\ Complete\ Mono:h14 
-		"set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h12
-		"set guifont=Sauce\ Code\ Powerline:h12
-		"set guifont=Inconsolata:h13
 	endif
 endif
 
 set number
 set relativenumber
 set nowrap
+set encoding=UTF-8
 
 
-set guioptions-=r  "remove right-hand scroll bar
-set guioptions-=L  "remove left-hand scroll bar
+set guioptions-=r "remove right-hand scroll bar
+set guioptions-=L "remove left-hand scroll bar
 set guioptions-=m
 set guioptions-=T
 set diffopt+=vertical
@@ -39,7 +40,8 @@ set smartcase
 set hlsearch
 set incsearch
 
-set foldmethod=syntax
+" set foldmethod=syntax
+set foldmethod=indent
 " Don't fold by default
 au BufWinEnter * normal zR
 
@@ -68,19 +70,17 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 "------------ Bundles ---------------
 "NeoBundle 'JavaScript-Indent'
 NeoBundle 'chrisbra/Colorizer'
-"NeoBundle 'thinca/vim-quickrun'
-NeoBundle 'L9'
+NeoBundle 'lfilho/cosco.vim'
 NeoBundle 'Lokaltog/vim-easymotion'
 NeoBundle 'Raimondi/delimitMate'
 NeoBundle 'SirVer/ultisnips'
 NeoBundle 'Valloric/YouCompleteMe'
 NeoBundle 'bkad/CamelCaseMotion'
 NeoBundle 'bling/vim-airline'
-"NeoBundle 'christoomey/vim-conflicted'
 NeoBundle 'docunext/closetag.vim'
 NeoBundle 'editorconfig/editorconfig-vim'
-NeoBundle 'elzr/vim-json'
-"NeoBundle 'godlygeek/tabular'
+NeoBundle 'mrk21/yaml-vim'
+"NeoBundle 'elzr/vim-json'
 NeoBundle 'honza/vim-snippets'
 NeoBundle 'ihacklog/HiCursorWords'
 NeoBundle 'ctrlpvim/ctrlp.vim'
@@ -92,8 +92,9 @@ NeoBundle 'pangloss/vim-javascript'
 NeoBundle 'rking/ag.vim'
 NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'scrooloose/nerdtree'
-"NeoBundle 'scrooloose/syntastic'
+" NeoBundle 'scrooloose/syntastic'
 NeoBundle 'w0rp/ale'
+" NeoBundle 'Quramy/tsuquyomi'
 NeoBundle 'tmhedberg/matchit'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tpope/vim-git'
@@ -102,24 +103,22 @@ NeoBundle 'tpope/vim-unimpaired'
 NeoBundle 'tpope/vim-abolish'
 NeoBundle 'yegappan/mru'
 NeoBundle 'jistr/vim-nerdtree-tabs'
-NeoBundle 'leafgarland/typescript-vim'
 NeoBundle 'AndrewRadev/splitjoin.vim'
-NeoBundle 'quramy/tsuquyomi'
-"NeoBundle 'IN3D/vim-raml'
 NeoBundleLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
 NeoBundle 'ryanoasis/vim-devicons'
 NeoBundle 'tiagofumo/vim-nerdtree-syntax-highlight'
-NeoBundle 'bdauria/angular-cli.vim'
 NeoBundle 'tomasr/molokai'
-NeoBundle 'Shougo/vimproc.vim', {
-			\ 'build' : {
-			\     'windows' : 'tools\\update-dll-mingw',
-			\     'cygwin' : 'make -f make_cygwin.mak',
-			\     'mac' : 'make',
-			\     'linux' : 'make',
-			\     'unix' : 'gmake',
-			\    },
-			\ }
+NeoBundle 'jeetsukumaran/vim-indentwise'
+NeoBundle 'mxw/vim-jsx'
+" NeoBundle 'Shougo/vimproc.vim', {
+			" \ 'build' : {
+			" \     'windows' : 'tools\\update-dll-mingw',
+			" \     'cygwin' : 'make -f make_cygwin.mak',
+			" \     'mac' : 'make',
+			" \     'linux' : 'make',
+			" \     'unix' : 'gmake',
+			" \    },
+			" \ }
 if has("mac")
 	NeoBundle 'airblade/vim-gitgutter' "creates new window on Win OS, annoying only use on Mac
 	NeoBundle 'rizzatti/dash.vim' " Require mac only app dash
@@ -141,6 +140,7 @@ nmap <leader>tb :TagbarToggle<CR>
 map <leader>fj :%!python -m json.tool<CR>
 map <leader>fx :% !xmllint --format -<CR>
 map <leader>nr :NERDTree root<CR>
+map <f12> :TernDef<cr>
 noremap <c-h> <c-w>h
 noremap <c-j> <c-w>j
 noremap <c-k> <c-w>k
@@ -158,6 +158,12 @@ nnoremap <Leader>yff :let @*=expand("%:p")<cr>:echo "Copied file directory to cl
 
 nnoremap <leader>nf :NERDTreeFind<cr>
 
+" Call eslint to fix errors, can be removed if ALEFix works properly
+" nnoremap <leader><leader>f :silent !npm-run eslint --fix %:p<cr>
+
+  " Bind F8 to fixing problems with ALE
+  nmap <F8> <Plug>(ale_fix)
+
 " change single line html to multiple lines
 imap <c-y><c-y> <c-y>,<c-c>^lma:s/>/>\r/g<cr>`a=%
 
@@ -167,6 +173,8 @@ inoremap <c-y>f <c-c>:s/\.\w*'/'<cr>A;<c-c>
 " add semicolon to the end of the block
 inoremap <c-y>; <c-c>/[\]})]<cr>A;
 
+inoremap <leader>; <c-c>A;<c-c>hi
+
 nnoremap <leader>tr A,<cr><c-c>i"<c-r>0": "<c-r>-"<c-c>==:s/ "$/"/e<cr>
 nmap <leader>tt gUiwyiwf>ldit<c-h>,tr<c-l>
 nmap <leader>ct yit<c-h>^3f"Pj<c-l>
@@ -175,6 +183,9 @@ nmap <leader>at ^/translate<cr>2f"byw<c-h>A,<cr>"<c-r>0": ""<c-c>i
 nmap <leader>rt dit<c-h>^3f""-P<c-c>/: "<cr><c-l>/translate<cr>
 " copy line, add it to json
 nmap <leader>dt ^d$<c-h>pn<c-l>j
+
+autocmd FileType javascript,css nmap <silent> <Leader>; <Plug>(cosco-commaOrSemiColon)
+autocmd FileType javascript,css imap <silent> <Leader>; <c-o><Plug>(cosco-commaOrSemiColon)
 "------------- Key Mappings --------------------
 "To support custom tag
 let g:html_indent_tags='\w\+'
@@ -252,8 +263,6 @@ set dir=~/vimswap/
 " set default pwd
 " --------------- Project specific ----------------------
 let g:ycm_autoclose_preview_window_after_insertion = 1
-" Collect identifiers from string, easier to edit json file
-let g:ycm_collect_identifiers_from_comments_and_strings = 1 
 let g:delimitMate_expand_cr = 2
 
 if executable('ag')
@@ -280,12 +289,14 @@ augroup END
 
 
 " For Ag
-let g:ag_prg="ag --column --smart-case --hidden --ignore='*.min.*'"
+" let g:ag_prg="ag --column --smart-case --hidden --ignore='*.min.*'"
+let g:ag_prg="ag --path-to-agignore 'C:/Users/ezluoxi/.agignore' --column --smart-case --vimgrep"
 let g:ag_highlight=1
 
-let g:syntastic_typescript_checkers = ['tslint']
-" Disable html checking
-let g:syntastic_html_checkers = []
+" let g:syntastic_typescript_checkers = ['tslint']
+" let g:syntastic_javascript_checkers = ['eslint']
+" " Disable html checking
+" let g:syntastic_html_checkers = []
 
 " For nerdtree-tabs
 let g:nerdtree_tabs_open_on_new_tab = 0
@@ -305,16 +316,26 @@ let g:NERDTreeExactMatchHighlightFullName = 1
 let g:NERDTreePatternMatchHighlightFullName = 1
 let g:NERDTreeIgnore=['\.spec\.ts$']
 
-" For angular-cli.vim
-let g:angular_cli_stylesheet_format = 'scss'
-autocmd FileType typescript,html call angular_cli#init()
-
 " For Colorizer
 let g:colorizer_auto_color=0
 let g:colorizer_auto_filetype='css,scss'
 
 " For youcompleteme
-let g:ycm_key_invoke_completion = '<M-Space>'
+" let g:ycm_key_invoke_completion = '<M-Space>'
+if has('win32')
+	let g:ycm_key_invoke_completion = '<A-Space>'
+endif
 
 " For ale
-let g:ale_linters = {'html': []}
+let g:ale_linters = {'javascript': ['eslint']}
+" let g:ale_fixers = {
+" \   'javascript': [
+" \       'eslint',
+" \   ],
+" \}
+let g:ale_fixers = {}
+let g:ale_fixers.javascript = ['eslint']
+
+" For vim-jsx
+let g:jsx_ext_required = 0 " The project uses js as the extension
+

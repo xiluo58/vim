@@ -1,5 +1,59 @@
+global !p
+def removeExtension(line):
+	snip.buffer[line] = re.sub('.[tj]s\';', '\';', snip.buffer[line])
+	snip.cursor.preserve()
+def to_camel_case(snake_str):
+    components = snake_str.split('_')
+    # We capitalize the first letter of each component except the first one
+    # with the 'title' method and join them together.
+    return components[0] + "".join(x.title() for x in components[1:])
+endglobal
+
+post_jump "if snip.tabstop == 0: removeExtension(snip.tabstops[0].start.line)"
+snippet import "Import" b
+import { $1 } from '$2';
+endsnippet
+
 snippet forl
 for(var ${1:i} = 0; $1 < ${2:object}.length; $1++){
 	${VISUAL}$0
+}
+endsnippet
+
+snippet function "Unnamed function"
+function (${1}) {
+	${2}
+}
+${0}
+endsnippet
+
+snippet nfunction "Named function"
+function ${1:name} ($2) {
+	${3}
+}
+${0}
+endsnippet
+
+snippet actions "Define actions in module"
+export const $1_REQUEST = '`!v expand("%:t:r")`/`!p snip.rv = t[1].lower().replace('_', ' ')` request';
+export const $1_FAILURE = '`!v expand("%:t:r")`/`!p snip.rv = t[1].lower().replace('_', ' ')` failure';
+export const $1_SUCCESS = '`!v expand("%:t:r")`/`!p snip.rv = t[1].lower().replace('_', ' ')` success';
+
+function `!p snip.rv = to_camel_case(t[1].lower())`Request () {
+	return {
+		type: $1_REQUEST
+	};
+}
+
+function `!p snip.rv = to_camel_case(t[1].lower())`Failure () {
+	return {
+		type: $1_FAILURE
+	};
+}
+
+function `!p snip.rv = to_camel_case(t[1].lower())`Success () {
+	return {
+		type: $1_SUCCESS
+	};
 }
 endsnippet

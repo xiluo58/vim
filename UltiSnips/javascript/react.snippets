@@ -1,0 +1,24 @@
+snippet component "Create react component"
+import React from 'react';
+
+class `!v expand("%:t:r")` extends React.Component {
+	render () {
+		return (
+
+		);
+	}
+}
+
+export default `!v expand("%:t:r")`;
+endsnippet
+
+snippet constructor "Constructor"
+constructor (props) {
+	super(props);
+	$1
+}
+endsnippet
+
+snippet bind "Bind handlers"
+this.$1 = this.$1.bind(this);
+endsnippet
