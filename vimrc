@@ -51,60 +51,52 @@ let mapleader = ","
 "set list listchars=tab:\|\ ,trail:·,extends:»,precedes:«,nbsp:×
 
 " Required:
-call neobundle#begin(expand(g:vimFolder."bundle/"))
-
-" Let NeoBundle manage NeoBundle
-" Required:
-NeoBundleFetch 'Shougo/neobundle.vim'
-
-" You can specify revision/branch/tag.
-" NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
-
+call plug#begin(g:vimFolder."bundle/")
 
 "------------ Bundles ---------------
-"NeoBundle 'JavaScript-Indent'
-NeoBundle 'chrisbra/Colorizer'
-NeoBundle 'lfilho/cosco.vim'
-NeoBundle 'Lokaltog/vim-easymotion'
-NeoBundle 'Raimondi/delimitMate'
-NeoBundle 'SirVer/ultisnips'
-NeoBundle 'Valloric/YouCompleteMe'
-NeoBundle 'bkad/CamelCaseMotion'
-NeoBundle 'bling/vim-airline'
-NeoBundle 'docunext/closetag.vim'
-NeoBundle 'editorconfig/editorconfig-vim'
-NeoBundle 'mrk21/yaml-vim'
-"NeoBundle 'elzr/vim-json'
-NeoBundle 'honza/vim-snippets'
-NeoBundle 'ihacklog/HiCursorWords'
-NeoBundle 'ctrlpvim/ctrlp.vim'
-NeoBundle 'majutsushi/tagbar'
-NeoBundle 'ternjs/tern_for_vim'
-NeoBundle 'mattn/emmet-vim'
-NeoBundle 'othree/html5.vim'
-NeoBundle 'pangloss/vim-javascript'
-NeoBundle 'rking/ag.vim'
-NeoBundle 'scrooloose/nerdcommenter'
-NeoBundle 'scrooloose/nerdtree'
-" NeoBundle 'scrooloose/syntastic'
-NeoBundle 'w0rp/ale'
-" NeoBundle 'Quramy/tsuquyomi'
-NeoBundle 'tmhedberg/matchit'
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'tpope/vim-git'
-NeoBundle 'tpope/vim-surround'
-NeoBundle 'tpope/vim-unimpaired'
-NeoBundle 'tpope/vim-abolish'
-NeoBundle 'yegappan/mru'
-NeoBundle 'jistr/vim-nerdtree-tabs'
-NeoBundle 'AndrewRadev/splitjoin.vim'
-NeoBundleLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
-NeoBundle 'ryanoasis/vim-devicons'
-NeoBundle 'tiagofumo/vim-nerdtree-syntax-highlight'
-NeoBundle 'tomasr/molokai'
-NeoBundle 'jeetsukumaran/vim-indentwise'
-NeoBundle 'mxw/vim-jsx'
-" NeoBundle 'Shougo/vimproc.vim', {
+"Plug 'JavaScript-Indent'
+Plug 'chrisbra/Colorizer'
+Plug 'lfilho/cosco.vim'
+Plug 'Lokaltog/vim-easymotion'
+Plug 'Raimondi/delimitMate'
+Plug 'SirVer/ultisnips'
+Plug 'Valloric/YouCompleteMe'
+Plug 'bkad/CamelCaseMotion'
+Plug 'bling/vim-airline'
+Plug 'docunext/closetag.vim'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'mrk21/yaml-vim'
+"Plug 'elzr/vim-json'
+Plug 'honza/vim-snippets'
+Plug 'ihacklog/HiCursorWords'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'majutsushi/tagbar'
+Plug 'ternjs/tern_for_vim'
+Plug 'mattn/emmet-vim'
+Plug 'othree/html5.vim'
+Plug 'pangloss/vim-javascript'
+Plug 'rking/ag.vim'
+Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdtree'
+" Plug 'scrooloose/syntastic'
+Plug 'w0rp/ale'
+" Plug 'Quramy/tsuquyomi'
+Plug 'tmhedberg/matchit'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-git'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-abolish'
+Plug 'yegappan/mru'
+Plug 'jistr/vim-nerdtree-tabs'
+Plug 'AndrewRadev/splitjoin.vim'
+" PlugLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
+Plug 'ryanoasis/vim-devicons'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'tomasr/molokai'
+Plug 'jeetsukumaran/vim-indentwise'
+Plug 'mxw/vim-jsx'
+" Plug 'Shougo/vimproc.vim', {
 			" \ 'build' : {
 			" \     'windows' : 'tools\\update-dll-mingw',
 			" \     'cygwin' : 'make -f make_cygwin.mak',
@@ -114,11 +106,11 @@ NeoBundle 'mxw/vim-jsx'
 			" \    },
 			" \ }
 if has("mac")
-	NeoBundle 'airblade/vim-gitgutter' "creates new window on Win OS, annoying only use on Mac
-	NeoBundle 'rizzatti/dash.vim' " Require mac only app dash
+	Plug 'airblade/vim-gitgutter' "creates new window on Win OS, annoying only use on Mac
+	Plug 'rizzatti/dash.vim' " Require mac only app dash
 endif
 
-call neobundle#end()
+call plug#end()
 " Required:
 filetype plugin indent on
 
