@@ -1,7 +1,4 @@
 let g:vimFolder = "~/.vim/"
-if has("win32")
-	let g:vimFolder = "~/vimfiles/"
-endif
 
 if has('vim_starting')
 	set nocompatible               " Be iMproved
@@ -56,31 +53,24 @@ call plug#begin(g:vimFolder."bundle/")
 "------------ Bundles ---------------
 "Plug 'JavaScript-Indent'
 Plug 'chrisbra/Colorizer'
-Plug 'lfilho/cosco.vim'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'Raimondi/delimitMate'
 Plug 'SirVer/ultisnips'
-Plug 'Valloric/YouCompleteMe'
+" Plug 'Valloric/YouCompleteMe'
 Plug 'bkad/CamelCaseMotion'
 Plug 'bling/vim-airline'
 Plug 'docunext/closetag.vim'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'mrk21/yaml-vim'
 "Plug 'elzr/vim-json'
 Plug 'honza/vim-snippets'
-Plug 'ihacklog/HiCursorWords'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'majutsushi/tagbar'
-Plug 'ternjs/tern_for_vim'
 Plug 'mattn/emmet-vim'
 Plug 'othree/html5.vim'
-Plug 'pangloss/vim-javascript'
 Plug 'rking/ag.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
-" Plug 'scrooloose/syntastic'
 Plug 'w0rp/ale'
-" Plug 'Quramy/tsuquyomi'
 Plug 'tmhedberg/matchit'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-git'
@@ -89,24 +79,16 @@ Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-abolish'
 Plug 'yegappan/mru'
 Plug 'jistr/vim-nerdtree-tabs'
-Plug 'AndrewRadev/splitjoin.vim'
 " PlugLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
-Plug 'ryanoasis/vim-devicons'
+Plug 'AndrewRadev/splitjoin.vim'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'tomasr/molokai'
 Plug 'jeetsukumaran/vim-indentwise'
-Plug 'mxw/vim-jsx'
-" Plug 'Shougo/vimproc.vim', {
-			" \ 'build' : {
-			" \     'windows' : 'tools\\update-dll-mingw',
-			" \     'cygwin' : 'make -f make_cygwin.mak',
-			" \     'mac' : 'make',
-			" \     'linux' : 'make',
-			" \     'unix' : 'gmake',
-			" \    },
-			" \ }
+Plug 'OmniSharp/omnisharp-vim'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'airblade/vim-gitgutter' "creates new window on "Win OS, annoying only use on Mac
+Plug 'dominikduda/vim_current_word'
 if has("mac")
-	Plug 'airblade/vim-gitgutter' "creates new window on Win OS, annoying only use on Mac
 	Plug 'rizzatti/dash.vim' " Require mac only app dash
 endif
 
@@ -308,9 +290,9 @@ let g:colorizer_auto_filetype='css,scss'
 
 " For youcompleteme
 " let g:ycm_key_invoke_completion = '<M-Space>'
-if has('win32')
-	let g:ycm_key_invoke_completion = '<A-Space>'
-endif
+" if has('win32')
+	" let g:ycm_key_invoke_completion = '<A-Space>'
+" endif
 
 " For ale
 let g:ale_linters = {'javascript': ['eslint']}
@@ -325,3 +307,5 @@ let g:ale_fixers.javascript = ['eslint']
 " For vim-jsx
 let g:jsx_ext_required = 0 " The project uses js as the extension
 
+" Use deoplete.
+let g:deoplete#enable_at_startup = 1
